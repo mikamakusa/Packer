@@ -1,0 +1,76 @@
+{
+	"variables": {
+		"TEMPLATE_NAME": "",
+		"TEMPLATE_VERSION": "",
+		"VCENTER_SERVER": "",
+		"VCENTER_USER": "",
+		"VCENTER_PASSWORD": "",
+		"SSH_USER": "",
+		"SSH_PASSWORD": "",
+		"DATACENTER_NAME": "",
+		"CLUSTER_NAME": "",
+		"CPU": "",
+		"RAM": "",
+		"DISK_SIZE": "",
+		"NETWORK": "",
+		"VM_ISO_DATASTORE": "",
+		"ISO_VENDOR": "",
+		"ISO_FILE": ""
+	},
+	"sensitive-avariables": [
+		"VCENTER_USER",
+		"VCENTER_PASSWORD",
+		"SSH_USER",
+		"SSH_PASSWORD"
+	],
+	"builders": [
+		{
+			"type": "vsphere-iso",
+			"vcente_server": "{{user `VCENTER_SERVER` }}",
+			"username": "{{user `VCENTER_USER` }}",
+			"password": "{{user `VCENTER_PASSWORD` }}",
+			"insecure_connection": "",
+			"datacenter": "{{user `DATACENTER_NAME` }}",
+			"cluster": "{{user `CLUSTER_NAME` }}",
+			"folder": "VM_TEMPLATES",
+			"datastore": "VM_TEMPLATES_DATASTORE",
+			"vm_name": "{{user `TEMPLATE_NAME` }}-{{user `TEMPLATE_VERSION` }}",
+			"vm_version": "{{ user `TEMPLATE_VERSION `}}",
+			"CPUs": "{{user `CPU` }}",
+			"CPU_hot_plug": true,
+			"RAM": "{{user `RAM` }}",
+			"RAM_reserve_all": false,
+			"RAM_hot_plug": true,
+			"nested_hv": true,
+			"vTPM": true,
+			"guest_os_type": "",
+			"tools_upgrade_policy": true,
+			"firmware": "efi-secure",
+			"storage": [
+				{
+					"disk_size": "{{user `DISK_SIZE` }}",
+					"disk_thin_provisioned": true
+				}
+			],
+			"network_adapters": [
+				{
+					"network": "{{user `NETWORK` }}",
+					"network_card": "vmxnet1"
+				}
+			],
+			"iso_paths": "{{user `VM_ISO_DATASTORE`}} iso/{{user `ISO_VENDOR`}}/{{user `ISO_FILE`}}",
+			"cd_files": ["./init/kickstart.cfg"],
+			"boot_command": "<esc> <wait>vmlinuz initrd=initrd.img inst.ks=hd:sr1:/kickstart.cfg <enter><wait>",
+			"ssh_username": "{{user `SSH_USER`}}",
+			"ssh_password": "{{user `SSH_PASSWORD`}}",
+			"convert_to_template": "true"
+		}
+	],
+	"provisioners": [
+		{
+			"type": "ansible_local",
+			"playbook_file": ""
+		}
+	],
+	"post-processors": []
+}
