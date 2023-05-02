@@ -35,11 +35,13 @@ variable "VMTOOLS_DISK" {
 }
 
 variable "USERNAME" {
-  type = string
+  type      = string
+  sensitive = true
 }
 
 variable "PASSWORD" {
-  type = string
+  type      = string
+  sensitive = true
 }
 
 variable "VCENTER_SERVER" {
@@ -56,11 +58,12 @@ variable "KICKSTART_CFG" {
 }
 
 variable "NETWORK_ADAPTERS" {
-  type    = string
-  default = ""
+  type = list
 }
 
 variable "STORAGE" {
-  type    = string
-  default = ""
+  type = list(object({
+    disk_size             = string
+    disk_thin_provisioned = string
+  }))
 }
