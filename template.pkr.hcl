@@ -1,8 +1,8 @@
 source "vsphere-iso" "linux" {
-  CPUs                 = var.CPUs
-  RAM                  = var.RAM
-  RAM_reserve_all      = true
-  boot_command         = ["<enter><wait><f6><wait><esc><wait>",
+  CPUs            = var.CPUs
+  RAM             = var.RAM
+  RAM_reserve_all = true
+  boot_command = ["<enter><wait><f6><wait><esc><wait>",
     "<bs><bs><bs><bs><bs><bs><bs><bs><bs><bs>",
     "<bs><bs><bs><bs><bs><bs><bs><bs><bs><bs>",
     "<bs><bs><bs><bs><bs><bs><bs><bs><bs><bs>",
@@ -14,7 +14,7 @@ source "vsphere-iso" "linux" {
     "<bs><bs><bs>", "/install/vmlinuz",
     " initrd=/install/initrd.gz", " priority=critical",
     " locale=en_US", " file=/media/${var.KICKSTART_CFG}.cfg",
-    "<enter>"]
+  "<enter>"]
   disk_controller_type = ["pvscsi"]
   floppy_files         = [join("/", [path.root, "init", var.KICKSTART_CFG])]
   guest_os_type        = var.GUEST_OS_TYPE
@@ -55,9 +55,7 @@ source "vshpere-iso" "Windows" {
   RAM_reserve_all      = true
   communicator         = "winrm"
   disk_controller_type = ["pvscsi"]
-  floppy_files         = [
-    join("/", [path.root, "init", "unattend.xml"]),
-    join("/", [path.root, "init", "sysprep.bat"])]
+  floppy_files         = [join("/", [path.root, "init", "unattend.xml"]), join("/", [path.root, "init", "sysprep.bat"])]
   floppy_img_path      = join(" ", [var.VM_ISO_DATASTORE, join("/", ["ISO", "VMware Tools", var.VMTOOLS_VERSION, var.VMTOOLS_DISK])])
   guest_os_type        = var.GUEST_OS_TYPE
   host                 = var.VCENTER_HOST
@@ -88,10 +86,5 @@ source "vshpere-iso" "Windows" {
 
   build {
     source = ["source.vsphere-iso.windows"]
-
-    provisioner "windows-shell" {
-      inline = ["netsh advfirewall firewall add rule name="Port 5985" dir=in action=allow protocol=TCP localport=5985",
-      "sc.exe config winrm start= auto"]
-    }
   }
 }

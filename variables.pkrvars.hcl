@@ -1,9 +1,9 @@
 variable "CPUs" {
-  type = number
+  type = string
 }
 
 variable "RAM" {
-  type = number
+  type = string
 }
 
 variable "TEMPLATE_NAME" {
@@ -15,8 +15,7 @@ variable "TEMPLATE_VERSION" {
 }
 
 variable "VM_ISO_DATASTORE" {
-  type    = list(string)
-  default = []
+  type = string
 }
 
 variable "ISO_FILE" {
@@ -39,9 +38,8 @@ variable "USERNAME" {
   type = string
 }
 
-variable "password" {
-  type      = string
-  sensitive = true
+variable "PASSWORD" {
+  type = string
 }
 
 variable "VCENTER_SERVER" {
@@ -58,15 +56,11 @@ variable "KICKSTART_CFG" {
 }
 
 variable "NETWORK_ADAPTERS" {
-  type    = list(object{
-    network_card = string
-  })
-  default = []
+  type    = string
+  default = ""
 }
 
-variable "storage" {
-  type = list(object{
-    disk_size = number
-  })
-  default = []
+variable "STORAGE" {
+  type    = string
+  default = ""
 }
