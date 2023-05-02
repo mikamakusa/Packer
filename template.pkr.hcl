@@ -1,8 +1,8 @@
 source "vsphere-iso" "linux" {
-  CPUs            = var.CPUs
-  RAM             = var.RAM
-  RAM_reserve_all = true
-  boot_command = ["<enter><wait><f6><wait><esc><wait>",
+  CPUs                 = var.CPUs
+  RAM                  = var.RAM
+  RAM_reserve_all      = true
+  boot_command         = ["<enter><wait><f6><wait><esc><wait>",
     "<bs><bs><bs><bs><bs><bs><bs><bs><bs><bs>",
     "<bs><bs><bs><bs><bs><bs><bs><bs><bs><bs>",
     "<bs><bs><bs><bs><bs><bs><bs><bs><bs><bs>",
@@ -14,7 +14,7 @@ source "vsphere-iso" "linux" {
     "<bs><bs><bs>", "/install/vmlinuz",
     " initrd=/install/initrd.gz", " priority=critical",
     " locale=en_US", " file=/media/${var.KICKSTART_CFG}.cfg",
-  "<enter>"]
+    "<enter>"]
   disk_controller_type = ["pvscsi"]
   floppy_files         = [join("/", [path.root, "init", var.KICKSTART_CFG])]
   guest_os_type        = var.GUEST_OS_TYPE
@@ -22,19 +22,13 @@ source "vsphere-iso" "linux" {
   insecure_connection  = true
   iso_paths            = [join(" ", [var.VM_ISO_DATASTORE, join("/", ["ISO", var.ISO_FILE])])]
 
-  dynamic "network_adapters" {
-    for_each = var.NETWORK_ADAPTERS
-    content {
-      network_card = network_adapters.value.network_card
-    }
+  network_adapters {
+    network_card = "vmxnet3"
   }
 
-  dynamic "storage" {
-    for_each = var.STORAGE
-    content {
-      disk_size             = storage.value.disk_size
-      disk_thin_provisioned = true
-    }
+  storage {
+    disk_size             = 32768
+    disk_thin_provisioned = true
   }
 
   password       = var.PASSWORD
@@ -55,26 +49,20 @@ source "vshpere-iso" "Windows" {
   RAM_reserve_all      = true
   communicator         = "winrm"
   disk_controller_type = ["pvscsi"]
-  floppy_files         = [join("/", [path.root, "init", "unattend.xml"]), join("/", [path.root, "init", "sysprep.bat"])]
+  floppy_files         = [join("/", [path.root, "init"])]
   floppy_img_path      = join(" ", [var.VM_ISO_DATASTORE, join("/", ["ISO", "VMware Tools", var.VMTOOLS_VERSION, var.VMTOOLS_DISK])])
   guest_os_type        = var.GUEST_OS_TYPE
   host                 = var.VCENTER_HOST
   insecure_connection  = "true"
   iso_paths            = [join(" ", [var.VM_ISO_DATASTORE, join("/", ["ISO", var.ISO_FILE])])]
 
-  dynamic "network_adapters" {
-    for_each = var.NETWORK_ADAPTERS
-    content {
-      network_card = network_adapters.value.network_card
-    }
+  network_adapters {
+    network_card = "vmxnet3"
   }
 
-  dynamic "storage" {
-    for_each = var.STORAGE
-    content {
-      disk_size             = storage.value.disk_size
-      disk_thin_provisioned = true
-    }
+  storage {
+    disk_size             = 32768
+    disk_thin_provisioned = true
   }
 
   username       = var.USERNAME
