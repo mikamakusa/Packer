@@ -1,13 +1,4 @@
-packer {
-  required_plugins {
-    virtualbox = {
-      version = ">= 0.0.1"
-      source  = "github.com/hashicorp/virtualbox"
-    }
-  }
-}
-
-source "virtualbox-iso" "image" {
+source "virtualbox-iso" "windows" {
   vm_name                   = join("-", [var.guest_os_type, var.vm_name])
   guest_os_type             = var.guest_os_type
   iso_url                   = var.iso_url
