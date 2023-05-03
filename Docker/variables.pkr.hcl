@@ -1,0 +1,5 @@
+variable "image" {
+  type = object({
+
+  })
+}
