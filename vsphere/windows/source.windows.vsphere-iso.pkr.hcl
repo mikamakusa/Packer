@@ -70,7 +70,6 @@ source "vsphere-iso" "windows-server-standard-core" {
     for_each = var.common_content_library_name != null ? [1] : []
     content {
       library     = var.common_content_library_name
-      description = local.build_description
       ovf         = var.common_content_library_ovf
       destroy     = var.common_content_library_destroy
       skip_import = var.common_content_library_skip_export
@@ -165,7 +164,6 @@ source "vsphere-iso" "windows-server-standard-dexp" {
     for_each = var.common_content_library_name != null ? [1] : []
     content {
       library     = var.common_content_library_name
-      description = local.build_description
       ovf         = var.common_content_library_ovf
       destroy     = var.common_content_library_destroy
       skip_import = var.common_content_library_skip_export
@@ -255,7 +253,6 @@ source "vsphere-iso" "windows-server-datacenter-core" {
     for_each = var.common_content_library_name != null ? [1] : []
     content {
       library     = var.common_content_library_name
-      description = local.build_description
       ovf         = var.common_content_library_ovf
       destroy     = var.common_content_library_destroy
       skip_import = var.common_content_library_skip_export
@@ -276,7 +273,6 @@ source "vsphere-iso" "windows-server-datacenter-core" {
 }
 
 source "vsphere-iso" "windows-server-datacenter-dexp" {
-
   vcenter_server      = var.vsphere_endpoint
   username            = var.vsphere_username
   password            = var.vsphere_password
@@ -350,7 +346,6 @@ source "vsphere-iso" "windows-server-datacenter-dexp" {
     for_each = var.common_content_library_name != null ? [1] : []
     content {
       library     = var.common_content_library_name
-      description = local.build_description
       ovf         = var.common_content_library_ovf
       destroy     = var.common_content_library_destroy
       skip_import = var.common_content_library_skip_export

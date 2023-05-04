@@ -66,7 +66,6 @@ source "vsphere-iso" "linux" {
     for_each = var.common_content_library_name != null ? [1] : []
     content {
       library     = var.common_content_library_name
-      description = local.build_description
       ovf         = var.common_content_library_ovf
       destroy     = var.common_content_library_destroy
       skip_import = var.common_content_library_skip_export
