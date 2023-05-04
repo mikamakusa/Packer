@@ -71,10 +71,10 @@ source "virtualbox-iso" "linux" {
   ]
 }
 
-# build {
-#   sources = ["source.virtualbox-iso.linux"]
+build {
+  sources = ["source.virtualbox-iso.linux"]
 
-#   provisioner "shell" {
-#     inline = []
-#   }
-# }
+  provisioner "shell" {
+    inline = var.commands_provision
+  }
+}

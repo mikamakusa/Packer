@@ -34,11 +34,11 @@ variable "vm_ssh_password" {
 }
 variable "vm_chipset" {
   type    = string
-  default = "ICH9"
+  default = "ich9"
 }
 variable "vm_firmware" {
   type    = string
-  default = "BIOS"
+  default = "bios"
 }
 variable "vm_nested_virt" {
   type    = bool
@@ -261,19 +261,16 @@ variable "common_data_source" {
   default = "disk"
 }
 variable "build_username" {
-  type      = string
-  default   = null
-  sensitive = true
+  type    = string
+  default = null
 }
 variable "build_password" {
-  type      = string
-  default   = null
-  sensitive = true
+  type    = string
+  default = null
 }
 variable "build_password_encrypted" {
-  type      = string
-  default   = null
-  sensitive = true
+  type    = string
+  default = null
 }
 variable "vm_guest_os_language" {
   type    = string
@@ -290,5 +287,9 @@ variable "vm_guest_os_timezone" {
 variable "iso_checksum_value" {
   type        = string
   description = "The checksum value provided by the vendor."
-  default = null
+  default     = null
+}
+variable "commands_provision" {
+  type    = list(string)
+  default = []
 }

@@ -1,0 +1,15 @@
+vm_guest_os_language = "fr_FR"
+vm_guest_os_keyboard = "fr"
+vm_guest_os_timezone = "UTC"
+vm_guest_os_family   = "linux"
+vm_guest_os_name     = "rocky"
+vm_guest_os_version  = "8.7"
+vm_guest_os_type     = "other5xLinux64Guest"
+vm_firmware          = "efi"
+vm_cpus              = 2
+vm_memory            = 2048
+vm_disk_size         = 40960
+iso_path             = "./"
+iso_file             = "Rocky-8.7-x86_64-dvd1.iso"
+iso_checksum_type    = "sha256"
+iso_checksum_value   = "4827dce1c58560d3ca470a5053e8d86ba059cbb77cfca3b5f6a5863d2aac5b84"

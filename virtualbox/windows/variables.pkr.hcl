@@ -308,3 +308,7 @@ variable "vm_inst_os_kms_key_standard" {
   type    = string
   default = null
 }
+variable "commands_provision" {
+  type    = list(string)
+  default = []
+}
