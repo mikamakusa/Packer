@@ -33,17 +33,17 @@ source "virtualbox-iso" "linux" {
   guest_additions_sha256    = var.vm_guest_additions_sha256
   guest_additions_url       = var.vm_guest_additions_url
   http_directory            = var.vm_http_directory
-  http_content              = var.vm_http_content
-  http_port_min             = var.vm_http_port_min
-  http_port_max             = var.vm_http_port_max
-  http_bind_address         = var.vm_http_bind_address
+  http_content              = var.common_data_source == "http" ? local.data_source_content : null
+  http_port_min             = var.common_data_source == "http" ? var.vm_http_port_min : null
+  http_port_max             = var.common_data_source == "http" ? var.vm_http_port_max : null
+  http_bind_address         = var.common_data_source == "http" ? var.vm_http_bind_address : null
   floppy_files              = var.vm_floppy_files
   floppy_dirs               = var.vm_floppy_dirs
   floppy_content            = var.vm_floppy_content
   floppy_label              = var.vm_floppy_label
   cd_files                  = var.vm_cd_files
   cd_label                  = var.vm_cd_label
-  cd_content                = var.vm_cd_content
+  cd_content                = var.common_data_source == "disk" ? local.data_source_content : null
   format                    = var.vm_format
   export_opts               = var.vm_export_opts
   output_directory          = join("-", ["output", local.vm_name])
@@ -62,10 +62,11 @@ source "virtualbox-iso" "linux" {
   usb                       = var.vm_usb
   vboxmanage                = var.vm_vboxmanage
   vboxmanage_post           = var.vm_vboxmanage_post
+  ssh_timeout               = "15m"
   boot_command = [
     "<up>",
-    "e",
-    "<down><down><end><wait>",
+    "<tab>",
+    "<wait>",
     "text ${local.data_source_command}",
     "<enter><wait><leftCtrlOn>x<leftCtrlOff>"
   ]
