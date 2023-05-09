@@ -62,7 +62,7 @@ source "virtualbox-iso" "linux" {
   usb                       = var.vm_usb
   vboxmanage                = var.vm_vboxmanage
   vboxmanage_post           = var.vm_vboxmanage_post
-  ssh_timeout               = "15m"
+  ssh_timeout               = "30m"
   boot_command = [
     "<up>",
     "<tab>",

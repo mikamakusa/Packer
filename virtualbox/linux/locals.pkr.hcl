@@ -9,6 +9,6 @@ locals {
     "./kickstart.cfg" = templatefile("${abspath(path.root)}/http/kickstart.cfg", {})
   }
   data_source_command        = var.common_data_source == "http" ? "inst.ks=http://{{ .HTTPIP }}:{{ .HTTPPort }}/kickstart.cfg" : "inst.ks=cdrom:/kickstart.cfg"
-  vm_name                    = "${var.vm_guest_os_family}-${var.vm_guest_os_name}-${var.vm_guest_os_version}"
+  vm_name                    = join("-", [var.vm_guest_os_family, var.vm_guest_os_name, var.vm_guest_os_version, var.vm_suffix])
   vm_virtualbox_version_file = join("-", ["packer", local.vm_name])
 }

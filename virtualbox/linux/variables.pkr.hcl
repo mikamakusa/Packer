@@ -1,14 +1,18 @@
 variable "vm_guest_os_family" {
   type    = string
-  default = "null"
+  default = null
 }
 variable "vm_guest_os_name" {
   type    = string
-  default = "null"
+  default = null
 }
 variable "vm_guest_os_version" {
   type    = string
-  default = "null"
+  default = null
+}
+variable "vm_suffix" {
+  type = string
+  default = null
 }
 variable "vm_guest_os_type" {
   type    = string
@@ -30,7 +34,7 @@ variable "vm_ssh_username" {
 variable "vm_ssh_password" {
   type      = string
   sensitive = true
-  default   = "null"
+  default   = null
 }
 variable "vm_chipset" {
   type    = string

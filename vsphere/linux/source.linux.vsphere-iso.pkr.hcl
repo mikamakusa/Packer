@@ -1,12 +1,12 @@
 source "vsphere-iso" "linux" {
-  vcenter_server       = var.vsphere_endpoint
-  username             = var.vsphere_username
-  password             = var.vsphere_password
-  insecure_connection  = var.vsphere_insecure_connection
-  datacenter           = var.vsphere_datacenter
-  cluster              = var.vsphere_cluster
-  datastore            = var.vsphere_datastore
-  folder               = var.vsphere_folder
+  vcenter_server       = var.vm_vsphere_endpoint
+  username             = var.vm_vsphere_username
+  password             = var.vm_vsphere_password
+  insecure_connection  = var.vm_vsphere_insecure_connection
+  datacenter           = var.vm_vsphere_datacenter
+  cluster              = var.vm_vsphere_cluster
+  datastore            = var.vm_vsphere_datastore
+  folder               = var.vm_vsphere_folder
   vm_name              = local.vm_name
   guest_os_type        = var.vm_guest_os_type
   firmware             = var.vm_firmware

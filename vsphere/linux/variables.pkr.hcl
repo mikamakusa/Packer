@@ -1,54 +1,54 @@
-variable "vsphere_endpoint" {
+variable "vm_vsphere_endpoint" {
   type        = string
   description = "The fully qualified domain name or IP address of the vCenter Server instance. (e.g. 'sfo-w01-vc01.sfo.rainpole.io')"
   default     = null
 }
 
-variable "vsphere_username" {
+variable "vm_vsphere_username" {
   type        = string
   description = "The username to login to the vCenter Server instance. (e.g. 'svc-packer-vsphere@rainpole.io')"
   sensitive   = true
   default     = null
 }
 
-variable "vsphere_password" {
+variable "vm_vsphere_password" {
   type        = string
   description = "The password for the login to the vCenter Server instance."
   sensitive   = true
   default     = null
 }
 
-variable "vsphere_insecure_connection" {
+variable "vm_vsphere_insecure_connection" {
   type        = bool
   description = "Do not validate vCenter Server TLS certificate."
   default     = null
 }
 
-variable "vsphere_datacenter" {
+variable "vm_vsphere_datacenter" {
   type        = string
   description = "The name of the target vSphere datacenter. (e.g. 'sfo-w01-dc01')"
   default     = null
 }
 
-variable "vsphere_cluster" {
+variable "vm_vsphere_cluster" {
   type        = string
   description = "The name of the target vSphere cluster. (e.g. 'sfo-w01-cl01')"
   default     = null
 }
 
-variable "vsphere_datastore" {
+variable "vm_vsphere_datastore" {
   type        = string
   description = "The name of the target vSphere datastore. (e.g. 'sfo-w01-cl01-vsan01')"
   default     = null
 }
 
-variable "vsphere_network" {
+variable "vm_vsphere_network" {
   type        = string
   description = "The name of the target vSphere network segment. (e.g. 'sfo-w01-dhcp')"
   default     = null
 }
 
-variable "vsphere_folder" {
+variable "vm_vsphere_folder" {
   type        = string
   description = "The name of the target vSphere cluster. (e.g. 'sfo-w01-fd-templates')"
   default     = null
